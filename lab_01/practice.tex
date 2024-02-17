@@ -1,0 +1,144 @@
+\chapter{Практические задания}
+
+\section{Задание 1}
+
+Представить следующие списки в виде списочных ячеек:
+\begin{enumerate}
+	\item \texttt{`(open close halph)}
+	\includeimage
+		{task_11}
+		{f}
+		{H}
+		{0.8\textwidth}
+		{}
+	\item \texttt{`((open1) (close2) (halph3))}
+	\includeimage
+		{task_12}
+		{f}
+		{H}
+		{0.8\textwidth}
+		{}
+	\item \texttt{`((one) for all (and (me (for you))))}
+	\includeimage
+		{task_13}
+		{f}
+		{H}
+		{0.8\textwidth}
+		{}
+	\item \texttt{`((TOOL) (call))}
+	\includeimage
+		{task_14}
+		{f}
+		{H}
+		{0.8\textwidth}
+		{}
+	\item \texttt{`((TOOL1) ((call2)) ((sell)))}
+	\includeimage
+		{task_15}
+		{f}
+		{H}
+		{0.8\textwidth}
+		{}
+	\item \texttt{`(((TOOL) (call)) ((sell)))}
+	\includeimage
+		{task_16}
+		{f}
+		{H}
+		{0.8\textwidth}
+		{}
+\end{enumerate}
+
+\section{Задание 2}
+
+Используя только функции CAR и CDR, написать выражения, возвращающие элементы заданного списка:
+\begin{enumerate}
+	\item второй;
+	\includelistingpretty
+		{task_21.el}{lisp}{}
+	\item третий;
+	\includelistingpretty
+		{task_22.el}{lisp}{}
+	\item четвертый.
+	\includelistingpretty
+		{task_23.el}{lisp}{}
+\end{enumerate}
+
+\section{Задание 3}
+
+Что будет в результате вычисления выражений?
+
+\begin{enumerate}
+	\item \texttt{(CAADR '((blue cube) (red pyramid)))}
+	
+	red
+	\item \texttt{(CDAR '((abc) (def) (ghi)))}
+	
+	Nil
+	\item \texttt{(CADR '((abc) (def) (ghi)))}
+	
+	(def)
+	\item \texttt{(CADDR '((abc) (def) (ghi)))}
+	
+	(ghi)
+\end{enumerate}
+
+\section{Задание 4}
+
+Напишите результат вычисления выражений и объясните, как он получен:
+
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{|X|X|}
+		\hline
+		Выражение & Результат вычисления \\ \hline
+		\texttt{(list 'Fred 'and 'Wilma)} & (FRED AND WILMA) \\ \hline
+		\texttt{(list 'Fred '(and Wilma))} & (FRED (AND WILMA)) \\ \hline
+		\texttt{(cons Nil Nil)} & (NIL) \\ \hline
+		\texttt{(cons T Nil)} & (T) \\ \hline
+		\texttt{(cons Nil T)} & (NIL . T) \\ \hline
+		\texttt{(list Nil)} & (NIL) \\ \hline
+		\texttt{(cons '(T) Nil)} & ((T)) \\ \hline
+		\texttt{(list '(one two) '(free temp))} & ((ONE TWO) (FREE TEMP)) \\ \hline
+		\texttt{(cons 'Fred '(and Wilma))} & (FRED AND WILMA) \\ \hline
+		\texttt{(cons 'Fred '(Wilma))} & (FRED WILMA) \\ \hline
+		\texttt{(list Nil Nil)} & (NIL NIL) \\ \hline
+		\texttt{(list T Nil)} & (T NIL) \\ \hline
+		\texttt{(list Nil T)} & (NIL T) \\ \hline
+		\texttt{(cons T (list Nil))} & (T NIL) \\ \hline
+		\texttt{(list '(T) Nil)} & ((T) NIL) \\ \hline
+		\texttt{(list '(one two) '(free temp))} & ((ONE TWO) FREE TEMP) \\ \hline
+	\end{tabularx}
+\end{table}
+
+\section{Задание 5}
+
+Написать лямбда-выражение и соответствующую функцию:
+
+\begin{enumerate}
+	\item функция (f ar1 ar2 ar3 ar4), возвращающая ((ar1 ar2) (ar3 ar4));
+	\includelistingpretty
+		{task_51.el}{lisp}{}
+	\includeimage
+		{task_51}
+		{f}
+		{H}
+		{1\textwidth}
+		{}
+	\item функция (f ar1 ar2), возвращающая ((ar1)(ar2));
+	\includelistingpretty
+		{task_52.el}{lisp}{}
+	\includeimage
+		{task_52}
+		{f}
+		{H}
+		{0.8\textwidth}
+		{}
+	\item функция (f ar1), возвращающая (((ar1))).
+	\includelistingpretty
+		{task_53.el}{lisp}{}
+	\includeimage
+		{task_53}
+		{f}
+		{H}
+		{0.3\textwidth}
+		{}
+\end{enumerate}
