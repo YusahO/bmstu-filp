@@ -1,0 +1,157 @@
+\chapter{Практические задания}
+
+\section{Задание 1}
+
+Составить диаграмму вычисления следующих выражений:
+
+\begin{enumerate}
+	\item \texttt{(equal 3 (abs -3))}
+	\includeimage{task_11}{f}{H}{0.5\textwidth}{}
+	
+	\item \texttt{(equal (+ 1 2) 3)}
+	\includeimage{task_12}{f}{H}{0.5\textwidth}{}
+	
+	\item \texttt{(equal (* 4 7) 21)}
+	\includeimage{task_13}{f}{H}{0.5\textwidth}{}
+	
+	\item \texttt{(equal (* 2 3) (+ 7 2))}
+	\includeimage{task_14}{f}{H}{0.5\textwidth}{}
+	
+	\item \texttt{(equal (- 7 3) (* 3 2))}
+	\includeimage{task_15}{f}{H}{0.5\textwidth}{}
+	
+	\item \texttt{(equal (abs (- 2 4)) 3)}
+	\includeimage{task_16}{f}{H}{0.5\textwidth}{}	
+\end{enumerate}
+
+\section{Задание 2}
+
+Написать функцию, вычисляющую гипотенузу прямоугольного треугольника по заданным катетам, и составить диаграмму ее вычисления.
+
+\includelistingpretty{task_2.lisp}{lisp}{}
+
+\includeimage{task_21}{f}{H}{0.5\textwidth}{}
+
+\section{Задание 3}
+
+Каковы результаты вычисления следующих выражений (объяснить возможную ошибку и варианты ее устранения)?
+\begin{enumerate}
+	\item \texttt{(list 'a c)}
+	\\ Ошибка, т.~к. С не самовычисляема. Вариант устранения: \texttt{(list 'a 'c)}, тогда результат \texttt{(A C)}
+	
+	\item \texttt{(cons 'a (b c))}
+	\\ Ошибка, т.~к. попытается вычислить (b c). 
+	\\ Вариант устранения: \texttt{(cons~'a~'(b c))}, тогда результат \texttt{(A B C)}.
+	
+	\item \texttt{(cons 'a '(b c))}	
+	\\ \texttt{(A B C)}
+	
+	\item \texttt{(caddr (1 2 3 4 5))}
+	\\ Ошибка, т.~к. попытается вызвать функцию 1 с аргументами 2, 3, 4, 5.
+	\\ Вариант устранения: представить \texttt{(1 2 3 4 5)} как список, т.~е. \texttt{'(1~2~3~4~5)}.
+	
+	\item \texttt{(cons 'a 'b 'c)}
+	\\ Ошибка, т.~к. у \texttt{cons} только 2 аргумента.
+	\\ Создание списка из трех элементов a, b, c: \texttt{(cons 'a '(b c))}.
+	
+	\item \texttt{(list 'a (b c))}
+	\\ Ошибка, т.~к. попытается вычислить (b c).
+	\\ Вариант устранения: представить как список: \texttt{(list 'a '(b c))}, тогда результат \texttt{(A (B C))}.
+	
+	\item \texttt{(list a '(b c))}
+	\\ Ошибка, т.~к. попытается вычислить a.
+	\\ Вариант устранения: блокировать вычисление a, т.~е. \texttt{(list 'a '(b c))}.
+	
+	\item \texttt{(list (+ 1 '(length '(1 2 3))))}
+	\\ Ошибка, т.~к. '(length '(1 2 3)) не является числом.
+	\\ Вариант устранения: \texttt{(list (+ 1 (length '(1 2 3))))}, тогда результат \texttt{(4)}.
+\end{enumerate}
+
+\section{Задание 4}
+
+Написать функцию longer\_than от двух списков-аргументов, которая возвращает T, если первый аргумент имеет большую длину.
+
+\includelistingpretty{task_4.lisp}{lisp}{}
+
+\section{Задание 5}
+
+Каковы результаты вычисления следующих выражений?
+
+\begin{enumerate}
+	\item \texttt{(cons 3 (list 5 6))}
+	\\ \texttt{(3 5 6)}
+	
+	\item \texttt{(cons 3 '(list 5 6))}
+	\\ \texttt{(3 LIST 5 6)}
+	
+	\item \texttt{(list 3 'from 9 'lives (- 9 3))}
+	\\ \texttt{(3 FROM 9 LIVES 6)}
+	
+	\item \texttt{(+ (length for 2 too) (car '(21 22 23)))}
+	\\ Ошибка
+	
+	\item \texttt{(cdr '(cons is short for ans))}
+	\\ \texttt{IS SHORT FOR ANS}
+	
+	\item \texttt{(car (list one two))}
+	\\ Ошибка
+	
+	\item \texttt{(car (list 'one 'two))}
+	\\ \texttt{ONE}
+\end{enumerate}
+
+\section{Задание 6}
+
+Дана функция \texttt{(defun mystery (x) (list (second x) (first x)))}.
+Каковы результаты вычисления следующих выражений?
+
+\begin{enumerate}
+	\item \texttt{(mystery (one two))}
+	\\ Ошибка, необходимо добавить ' к списку.
+	
+	\item \texttt{(mystery one 'two))}
+	\\ Ошибка, ожидается один элемент.
+	
+	\item \texttt{(mystery (last one two))}
+	\\ Ошибка, необходимо добавить ' к списку.
+	
+	\item \texttt{(mystery free)}
+	\\ Ошибка, необходимо добавить заключить free в скобки и добавить '.
+\end{enumerate}
+
+\section{Задание 7}
+
+Написать функцию, которая переводит температуру в системе Фаренгейта в температуру по Цельсию \texttt{(defun f-to-c (temp) ...)}.
+
+Формулы: $c = \frac{5}{9} \cdot (f - 32.0)$; $f = \frac{9}{5} \cdot c + 32.0$
+
+Как бы назывался роман Р. Брэдбери ``+451 по Фаренгейту'' в системе по Цельсию?
+
+\includelistingpretty{task_7.lisp}{lisp}{}
+
+\section{Задание 8}
+
+Что получится при вычислении каждого из выражений?
+
+\begin{enumerate}
+	\item \texttt{(list 'cons t NIL)}
+	\\ \texttt{(CONS T NIL)}
+	
+	\item \texttt{(eval (list 'cons t NIL))}
+	\\ \texttt{(T)}
+	
+	\item \texttt{(eval (eval (list 'cons t NIL)))}
+	\\ Ошибка
+	
+	\item \texttt{(apply \#'cons '(t NIL))}
+	\\ \texttt{(T)}
+	
+	\item \texttt{(eval NIL)}
+	\\ \texttt{(NIL)}
+	
+	\item \texttt{(list 'eval NIL)}
+	\\ \texttt{(EVAL NIL)}
+	
+	\item \texttt{(eval (list 'eval NIL))}
+	\\ \texttt{NIL}
+\end{enumerate}
