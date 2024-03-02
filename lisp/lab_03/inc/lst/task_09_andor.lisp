@@ -1,0 +1,5 @@
+(defun how_alike_andor (x y)
+    (or (and (or (= x y) (equal x y))  'the_same)
+        (and (and (oddp x) (oddp y))   'both_odd)
+        (and (and (evenp x) (evenp y)) 'both_even)
+        (and T                         'difference)))

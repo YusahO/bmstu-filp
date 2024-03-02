@@ -1,0 +1,79 @@
+\chapter{Практические задания}
+
+\section{Задание 1}
+
+Написать функцию, которая принимает целое число и возвращает первое четное число, не меньшее аргумента.
+
+\includelistingpretty{task_01.lisp}{lisp}{}
+
+\section{Задание 2}
+
+Написать функцию, которая принимает число и возвращает число того же знака, но с модулем на 1 больше модуля аргумента.
+
+\includelistingpretty{task_02.lisp}{lisp}{}
+
+\section{Задание 3}
+
+Написать функцию, которая принимает два числа и возвращает список этих чисел, расположенный по возрастанию.
+
+\includelistingpretty{task_03.lisp}{lisp}{}
+
+\section{Задание 4}
+\label{sec:t4}
+
+Написать функцию, которая принимает три числа и возвращает T только тогда, когда первое число расположено между вторым и третьим.
+
+\includelistingpretty{task_04.lisp}{lisp}{}
+
+\section{Задание 5}
+
+Каков результат вычисления следующих выражений?
+
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{|X|X|}
+		\hline
+		Выражение & Результат \\ \hline
+		\texttt{(and 'fee 'fie 'foe)} & FOE \\ \hline
+		\texttt{(or nil 'fie 'foe)} & FIE \\ \hline
+		\texttt{(and (equal 'abc 'abc) 'yes)} & YES \\ \hline
+		\texttt{(or 'fee 'fie 'foe)} & FEE \\ \hline
+		\texttt{(and nil 'fie 'foe)} & NIL \\ \hline
+		\texttt{(or (equal 'abc 'abc) 'yes)} & T \\ \hline
+	\end{tabularx}
+\end{table}
+
+\section{Задание 6}
+
+Написать предикат, который принимает два числа-аргумента и возвращает T, если первое число не меньше второго.
+
+\includelistingpretty{task_06.lisp}{lisp}{}
+
+\section{Задание 7}
+
+Какой из следующих двух вариантов предиката ошибочен и почему?
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{XX}
+		\texttt{(defun pred1 (x) \newline (and (numberp x) (plusp x)))} & 
+		\texttt{(defun pred2 (x) \newline (and (plusp x) (numberp x)))} \\
+	\end{tabularx}
+\end{table}
+
+Неправильным является второй вариант, т.~к. в нем сначала проверяется знак аргумента (предикат \texttt{plusp}) и только потом, является ли аргумент числом. Предикат \texttt{plusp} принимает только числовые аргументы, поэтому при вызове \texttt{pred2} с нечисловым аргументом интерпретатор выдаст ошибку.
+
+\section{Задание 8}
+
+Решить задачу 4, используя для ее решения конструкции: только IF, только COND, только AND/OR (решение приведено в пункте \ref{sec:t4}).
+
+\includelistingpretty{task_08_if.lisp}{lisp}{Только IF}
+
+\includelistingpretty{task_08_cond.lisp}{lisp}{Только COND}
+
+\section{Задание 9}
+
+Переписать функцию how-alike, приведенную в лекции и использующую COND, используя только конструкции IF, AND/OR.
+
+\includelistingpretty{task_09_orig.lisp}{lisp}{}
+
+\includelistingpretty{task_09_if.lisp}{lisp}{Только IF}
+
+\includelistingpretty{task_09_andor.lisp}{lisp}{Только AND/OR}
