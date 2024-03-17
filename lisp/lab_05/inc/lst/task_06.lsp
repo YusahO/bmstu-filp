@@ -1,0 +1,7 @@
+(defun select-between (lst a b)
+    (cond ((null (car lst)) nil)
+          (T (reduce #'(lambda (x y)
+                           (if (< a y b)
+                               (cons y x)
+                               x))
+                     lst :initial-value nil))))

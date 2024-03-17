@@ -1,0 +1,8 @@
+(defun set-equal (s1 s2)
+    (every #'(lambda (x) x)
+             (mapcar #'(lambda (x)
+                           (some #'(lambda (y) y)
+                                   (mapcar #'(lambda (y)
+                                                 (equal x y))
+                                             s1)))
+                        s2)))

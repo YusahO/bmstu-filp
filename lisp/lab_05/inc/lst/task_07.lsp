@@ -1,0 +1,6 @@
+(defun decart (lx ly)
+    (mapcar #'(lambda (x)
+              (mapcar #'(lambda (y)
+                        (cons x (cons y nil)))
+                      ly))
+              lx))
