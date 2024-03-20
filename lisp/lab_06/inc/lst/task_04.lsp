@@ -1,0 +1,12 @@
+(defun mul-lst-a (lst num)
+    (cond ((null lst) Nil)
+          (T (cons (* (car lst) num) 
+                   (mul-lst-a (cdr lst) num)))))
+
+(defun mul-lst-b (lst num)
+    (cond ((null lst) Nil)
+          ((numberp (car lst)) (cons (* (car lst) num)
+                                     (mul-lst-b (cdr lst) num)))
+          (T (cons (car lst)
+                   (mul-lst-b (cdr lst) num)))
+    ))

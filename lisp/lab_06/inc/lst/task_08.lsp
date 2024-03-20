@@ -1,0 +1,6 @@
+(defun allodd (lst)
+    (cond ((null lst) T)
+          ((or (not (numberp (car lst)))
+               (evenp (car lst))) Nil)
+          (T (allodd (cdr lst)))
+))

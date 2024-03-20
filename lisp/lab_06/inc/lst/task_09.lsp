@@ -1,0 +1,8 @@
+(defun first-odd (lst)
+    (cond ((null lst) Nil)
+          ((numberp lst)
+           (if (oddp lst)
+               lst))
+          (T (or (first-odd (car lst))
+                 (first-odd (cdr lst))))
+))

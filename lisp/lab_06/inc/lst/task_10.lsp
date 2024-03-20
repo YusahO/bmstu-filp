@@ -1,0 +1,5 @@
+(defun f (lst)
+    (cond ((null lst) Nil)
+          (T (cons (* (car lst) (car lst)) 
+                   (f (cdr lst))))
+))

@@ -1,0 +1,6 @@
+(defun sel-between (lst &optional (res Nil))
+    (cond ((null lst) res)
+          ((< 1 (car lst) 10) 
+           (sel-between (cdr lst)
+                        (nconc res (cons (car lst) Nil))))
+          (T (sel-between (cdr lst) res))))

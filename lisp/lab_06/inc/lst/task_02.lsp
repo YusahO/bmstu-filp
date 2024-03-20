@@ -1,0 +1,6 @@
+(defun get-first (lst)
+    (cond ((null lst) Nil)
+          ((and (listp lst)
+                (not (null (caar lst))))
+            (car lst))
+          (T (get-first (cdr lst)))))
