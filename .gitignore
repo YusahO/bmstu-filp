@@ -1,3 +1,15 @@
+# Repo specific
+*.BAK
+**Exe**
+**Obj**
+*.bk1
+*.pre
+*.vpr
+*.prj
+*.grd
+*.inc
+TestGoal.pro
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

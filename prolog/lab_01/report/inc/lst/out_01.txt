@@ -1,0 +1,3 @@
+Surname=Prohorov, City=SPb, Phonenum=111
+Surname=Vaselinina, City=Sochi, Phonenum=555
+2 Solutions

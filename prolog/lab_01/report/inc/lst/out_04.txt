@@ -1,0 +1,7 @@
+goal
+    owns(_,gray,Surname,City,Phonenum).
+
+% результат
+Surname=Markov, City=Kazan, Phonenum=500
+Surname=Vaselinina, City=Sochi, Phonenum=555
+2 Solutions

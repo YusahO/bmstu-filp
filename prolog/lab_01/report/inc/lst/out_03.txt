@@ -1,0 +1,5 @@
+goal
+    owns("Audi",_,Surname,City,Phonenum).
+
+% результат
+No Solution

@@ -1,0 +1,7 @@
+goal
+    owns("BMW",black,Surname,City,Phonenum).
+
+% результат
+Surname=Ivanov, City=Moscow, Phonenum=100
+Surname=Ivanov, City=Moscow, Phonenum=600
+2 Solutions
