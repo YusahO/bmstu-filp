@@ -1,0 +1,150 @@
+\chapter{Практическая часть}
+
+\section{Задание}
+
+Создать базу знаний <<Собственники>>, дополнив (и минимально изменив) базу знаний, хранящую знания (лаб. 7), знаниями о дополнительной собственности владельца:
+\begin{itemize}
+	\item <<Телефонный справочник>>: Фамилия, №тел, Адрес~--- структура (Город, Улица, №дома, №кв),
+	\item <<Автомобили>>: Фамилия\_владельца, Марка, Цвет, Стоимость и др.,
+	\item <<Вкладчики банков>>: Фамилия, Банк, Счет, Сумма и др.
+\end{itemize}
+
+Преобразовать знания об автомобиле к форме знаний о собственности.
+Вид собственности (кроме автомобиля):
+\begin{itemize}
+	\item Строение: стоимость и другие его характеристики;
+	\item Участок: стоимость и другие его характеристики;
+	\item Водный\_транспорт: стоимость и другие его характеристики.
+\end{itemize}
+
+Описать и использовать вариантный домен \textbf{Собственность}.
+Владелец может иметь, но только один объект каждого вида собственности (это касается и автомобиля), или не иметь некоторых видов собственности.
+Используя конъюнктивное правило и разные формы задания одного вопроса (пояснять, для какого задания~--- какой вопрос), обеспечить возможность поиска:
+\begin{enumerate}
+	\item названий всех объектов собственности заданного субъекта,
+	\item названий и стоимости всех объектов собственности заданного субъекта,
+	\item разработать правило, позволяющее найти суммарную стоимость всех объектов собственности заданного субъекта.
+\end{enumerate}
+
+Для 2-го пункта и одной фамилии составить таблицу, отражающую конкретный порядок работы системы, с объяснениями порядка работы и особенностей использования доменов (указать конкретные T1 и T2 и полную подстановку на каждом шаге).
+
+\includelistingpretty
+	{lab_02.pro}{prolog}{}
+
+\clearpage
+\section{Порядок работы системы}
+
+Вопрос: \texttt{property\_price(``Orlov'', PropType, Price).}
+
+	\footnotesize
+	\begin{xltabular}{\textwidth}{|l|X|Y|}
+		\hline
+		\textbf{№ шага} &
+		\textbf{Сравниваемые термы: результат; подстановка, если есть} &
+		\textbf{Дальнейшие действия: прямой ход или откат} \\ \hline
+		
+		1 & 
+		Сравнение:
+		\texttt{property\_price(``Orlov'', PropType, Price) == phonebook(``Ivanov'', 100, make\_address(``Moscow'', ``Taganskaya'', 18, 34))} \newline\newline
+		Унификация: неудача &
+		Прямой ход, переход к следующему предложению \\ \hline
+		
+		2 --  & \dots & \dots \\ \hline
+		
+		 &
+		Сравнение:
+		\texttt{property\_price(``Orlov'', PropType, Price) == property\_price(Surname, car, Price)} \newline\newline
+		Унификация: успех \newline\newline
+		Подстановка: \texttt{\{Surname = ``Orlov'', PropType = car, Price = Price\}} & 
+		Переход к телу правила. \newline\newline
+		Унификация\newline
+		\texttt{owner(``Orlov'', car(Price, \_, \_, \_))} \\ \hline
+		
+		 &
+		Сравнение:
+		\texttt{owner(``Orlov'', car(Price, \_, \_, \_)) == phonebook(``Ivanov'', 100, make\_address(``Moscow'', ``Taganskaya'', 18, 34))} \newline\newline
+		Унификация: неудача &
+		Прямой ход, переход к следующему предложению \\ \hline
+		
+		 --  & \dots & \dots \\ \hline
+		
+		 &
+		Сравнение:
+		\texttt{owner(``Orlov'', car(Price, \_, \_, \_)) == owner(``Orlov'', car(5100000, ``Lada'', black, ``P132YC797''))} \newline\newline
+		Унификация: успех \newline\newline
+		Подстановка: \texttt{\{Price = 5100000\}} & 
+		Решение найдено, в качестве побочного эффекта получена подстановка \texttt{\{Property = car, Price = 5100000\}} \newline\newline 
+		Откат с целью найти все возможные решения.
+		Реконкретизация переменной Price.
+		Переход к следующему предложению.\\ \hline
+		
+		 &
+		Сравнение:
+		\texttt{owner(``Orlov'', car(Price, \_, \_, \_)) == owner(``Vaselinina'', car(1100000, ``Nissan'', gray, ``K452HH123''))} \newline\newline
+		Унификация: неудача &
+		Прямой ход, переход к следующему предложению. \\ \hline
+		
+		 --  & \dots & \dots \\ \hline
+		 
+		 &
+		 &
+		Конец базы знаний~--- откат.
+		Реконкретизация переменных Surname, Property.
+		Переход к следующему предложению относительно шага N.\\ \hline
+		
+		&
+		Сравнение:
+		\texttt{property\_price(``Orlov'', PropType, Price) == property\_price(Surname, building, Price)} \newline\newline
+		Унификация: успех \newline\newline
+		Подстановка: \texttt{\{Surname = ``Orlov'', PropType = building, Price = Price\}} & 
+		Переход к телу правила. \newline\newline
+		Унификация\newline
+		\texttt{owner(``Orlov'', building(Price, \_,))} \\ \hline
+		
+		 &
+		Сравнение:
+		\texttt{owner(``Orlov'', car(Price, \_, \_, \_)) == phonebook(``Ivanov'', 100, make\_address(``Moscow'', ``Taganskaya'', 18, 34))} \newline\newline
+		Унификация: неудача &
+		Прямой ход, переход к следующему предложению \\ \hline
+		
+		--  & \dots & \dots \\ \hline
+		
+		&
+		Сравнение:
+		\texttt{owner(``Orlov'', building(Price, \_)) == owner(``Orlov'', building(1000000, make\_address(``Murmansk'', ``Lenina'', 1, 9))).} \newline\newline
+		Унификация: успех \newline\newline
+		Подстановка: \texttt{\{Price = 1000000\}} & 
+		Решение найдено, в качестве побочного эффекта получена подстановка \texttt{\{Property = building, Price = 1000000\}} \newline\newline 
+		Откат с целью найти все возможные решения.
+		Реконкретизация переменной Price.
+		Переход к следующему предложению.\\ \hline
+		
+		&
+		Сравнение:
+		\texttt{owner(``Orlov'', building(Price, \_, \_, \_)) == 	owner(``Vaselinina'', land(300000, 56))} \newline\newline
+		Унификация: неудача &
+		Прямой ход, переход к следующему предложению \\ \hline
+		
+		--  & \dots & \dots \\ \hline
+		
+		 &
+		 &
+		Конец базы знаний~--- откат.
+		Реконкретизация переменных Surname, Property.
+		Переход к следующему предложению относительно шага N.\\ \hline
+		
+		&
+		Сравнение:
+		\texttt{property\_price(``Orlov'', PropType, Price) == property\_cost(Surname, car, Cost)} \newline\newline
+		Унификация: неудача &
+		Прямой ход, переход к следующему предложению \\ \hline
+				
+		--  & \dots & \dots \\ \hline
+		
+		&
+		&
+		Конец базы знаний.
+		Завершение работы. \newline\newline
+		На вопрос удалось получить ответ <<да>>, поэтому в качестве побочного эффекта возвращено 2 подстановки.
+		\\ \hline
+	\end{xltabular}
